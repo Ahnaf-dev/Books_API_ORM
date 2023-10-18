@@ -5,6 +5,7 @@ require('dotenv').config()
 const port = process.env.PORT || 3000;
 const Book = require('./models/book');
 const bookRouter = require('./routes/book');
+const authorRouter = require('./routes/author')
 
 
 app.use(express.json());
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // routes
 app.use('/api/books', bookRouter)
+app.use('/api/authors', authorRouter)
 
 
 app.listen(port, async () => {
@@ -20,6 +22,7 @@ app.listen(port, async () => {
   try {
     await sequelize.authenticate();
     console.log('Connection to database has been established successfully.');
+    // sequelize.sync();
 
   } catch (error) {
     console.error('Unable to connect to the database:', error);

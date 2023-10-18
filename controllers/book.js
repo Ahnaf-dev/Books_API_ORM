@@ -1,17 +1,18 @@
 const Book = require("../models/book");
 
 const createBook = async (req, res) => {
-  const { title } = req.body;
+  const { authorId, title } = req.body;
 
-  if (!title) {
-    res.status(400).json({ error: "Please provide a title" });
+  if (!title || !authorId) {
+    res.status(400).json({ error: "Please provide a title or authorId" });
   }
 
+
   try {
-    const book = await Book.create({ title });
+    const book = await Book.create({ title, authorId });
     res.status(201).json(book);
   } catch (err) {
-    res.status(500).json({ error: "Error creating the book" });
+    res.status(500).json({ error: "Error creating the book, please provide a valid authorId or title" });
   }
 };
 
@@ -39,10 +40,10 @@ const getBookDetails = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  const { title } = req.body;
+  const { authorId, title } = req.body;
 
-  if (!title) {
-    res.status(400).json({ error: "Please provide a title" });
+  if (!title || !authorId) {
+    res.status(400).json({ error: "Please provide a title or authorId" });
   }
 try {
   const book = await Book.findByPk(req.params.id);
@@ -50,7 +51,7 @@ try {
   if (!book) {
     res.status(404).json({ error: 'Book not found' });
   } else {
-    book.update({title});
+    book.update({title, authorId});
     res.json(book);
   }
 
