@@ -9,7 +9,7 @@ The Bookstore Management System is a web application built using Node.js, Expres
 ## Technical Features
 
 **Database Setup:**
-- Created a MySQL database for the application to store book and author data.
+- Created a MySQL database to store books and authors data.
 - Established a connection to the database using Sequelize and MySQL2.
 
 **Model Definition:**
